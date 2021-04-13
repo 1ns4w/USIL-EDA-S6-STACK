@@ -17,17 +17,18 @@ public:
   // Constructor
   Stack() : m_top(0)  {  }
   // Destructor
-  ~Stack() {   } 
+  ~Stack() {   }
   // Returns the number of elements
   size_t size() { return m_top;  }
 
   // Insert a new item to my stack
-  
+
   //Se usa el && para hacer referencia a un valor temporal - Luis Mendoza
 
   void push(T &&elem);
   // Remove and return the item on the top
   T pop();
+  void clear_stack() {m_top=0; m_stack.clear();}
 
   void flush_printing(ostream &os);
 };
@@ -36,7 +37,7 @@ template <typename T>
 void Stack<T>::push(T &&elem)
 {
   m_stack.insert(m_stack.end(), elem);
-  m_top++; 
+  m_top++;
 }
 
 template <typename T>
@@ -44,8 +45,15 @@ T Stack<T>::pop()
 {
   if(m_top>0)
     return m_stack[--m_top];
-  throw out_of_range("This stack is empty."); 
+  throw out_of_range("This stack is empty.");
 }
+template <typename T>
+void Stack<T>::clear_stack()
+{
+  while( size() > 0) // Tiene elementos?
+  pop();
+
+  }
 
 template <typename T>
 void Stack<T>::flush_printing(ostream &os)
@@ -63,4 +71,4 @@ void Stack<T>::flush_printing(ostream &os)
 
 #endif
 
-// Pendiente subir  
+// Pendiente subir
